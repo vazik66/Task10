@@ -10,7 +10,7 @@
 ![Результат_2](images/cProfile_old_filter_1.png)
 
 Результаты профилирования [filter_with_filename.py](https://github.com/vazik66/Task10/blob/main/filter_with_filename.py):
-![Результат_3](images/cProfile_old_filter_1.png)
+![Результат_3](images/cProfile_filter_2.png)
 
 Можно увидеть, что результаты сильно изменились.
 
