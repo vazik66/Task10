@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy as np
+import doctest
 
 
 def get_avg_brightness(img_data, mosaic_size, x, y):
@@ -13,6 +14,9 @@ def get_avg_brightness(img_data, mosaic_size, x, y):
 
     Returns:
         float: average brightness
+
+    >>> get_avg_brightness(np.array(Image.open('images/test_image.jpg')), 10, 0, 0)
+    144.99
     """
     return np.average(img_data[x : x + mosaic_size, y : y + mosaic_size])
 
@@ -23,7 +27,7 @@ def save_image(data, file_name, path):
     Args:
         data (ndarray): array with data from image
         file_name (string): name of new file
-        path (string): path to input image 
+        path (string): path to input image
     """
     Image.fromarray(data).save(f'{file_name}.{path.split(".")[-1]}')
 
@@ -40,8 +44,10 @@ def create_mosaic(img_data, img_size, mosaic_size, grayscale_step):
     for x in range(0, img_size[0], mosaic_size):
         for y in range(0, img_size[1], mosaic_size):
             avg_brightness = get_avg_brightness(img_data, mosaic_size, x, y)
-            img_data[x : x + mosaic_size, y : y + mosaic_size] = avg_brightness - avg_brightness % grayscale_step
-            
+            img_data[x : x + mosaic_size, y : y + mosaic_size] = (
+                avg_brightness - avg_brightness % grayscale_step
+            )
+
 
 def main():
     path = input("Enter image path: ")
@@ -57,6 +63,7 @@ def main():
 
 
 if __name__ == "__main__":
+    doctest.testmod()
     try:
         main()
     except KeyboardInterrupt:
